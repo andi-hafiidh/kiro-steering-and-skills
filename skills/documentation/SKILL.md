@@ -1,234 +1,74 @@
 ---
 name: documentation
-description: Analyze a software repository and create or update standardized engineering documentation based on the project's source code, configuration, infrastructure, tests, dependencies, and environment variables.
+description: Menganalisis repository dan membuat atau memperbarui seluruh dokumentasi engineering wajib berdasarkan steering documentation-standard.
 ---
 
-# Documentation Analysis Skill
+# Documentation Skill
 
-## Purpose
+## Tujuan
 
-Analyze the current repository and generate or update engineering documentation according to the project's documentation steering standard.
+Gunakan skill ini untuk membuat atau memperbarui seluruh dokumentasi engineering project.
 
-The goal is to produce documentation that accurately represents the current implementation.
+Seluruh output dokumentasi MUST menggunakan Bahasa Indonesia sesuai steering.
 
-Do not invent information.
+## Input
 
----
+Gunakan repository aktif sebagai sumber utama.
 
-# 1. When to Use
+Optional user arguments dapat menentukan scope, misalnya:
 
-Use this skill when:
+- full
+- changed-only
+- infrastructure-only
+- existing-docs
+- release-review
 
-- creating documentation for a new project
-- documenting an existing project
-- updating documentation after implementation changes
-- performing documentation audit
-- detecting documentation drift
-- preparing a project for handover
-- preparing technical documentation for review
+## Prosedur
 
----
+1. Baca dan patuhi `.kiro/steering/documentation-standard.md`.
+2. Lakukan repository discovery.
+3. Identifikasi implementation, configuration, infrastructure, dependencies, tests, dan integrations.
+4. Periksa keberadaan dokumen wajib.
+5. Generate dokumen yang belum ada.
+6. Update dokumen yang outdated atau terdampak perubahan.
+7. Jangan mengarang informasi.
+8. Mask seluruh secret.
+9. Pastikan seluruh isi naratif menggunakan Bahasa Indonesia.
+10. Jalankan cross-document consistency validation.
+11. Jalankan documentation drift check.
+12. Laporkan hasil akhir.
 
-# 2. Repository Discovery
-
-Before generating documentation, inspect the repository.
-
-Identify:
-
-- programming language
-- application framework
-- project structure
-- API endpoints
-- database
-- cache
-- message broker
-- external services
-- environment variables
-- infrastructure
-- deployment configuration
-- CI/CD
-- tests
-- observability
-- storage
-
-Inspect relevant files such as:
+## Dokumen Wajib
 
 ```text
-README.md
-.env
-.env.example
-Dockerfile
-docker-compose.yml
-Makefile
-go.mod
-package.json
-requirements.txt
-pom.xml
-Jenkinsfile
-deployment/
-k8s/
-helm/
-terraform/
-src/
-cmd/
-internal/
-pkg/
-tests/
+docs/
+├── 01-functional-description.md
+├── 02-infrastructure.md
+├── 03-technology-stack.md
+├── 04-data-flow.md
+├── 05-unit-test-plan.md
+└── 06-capacity-planning.md
 ```
 
-Only inspect files that exist.
+## Evidence
 
----
-
-# 3. Documentation Assessment
-
-Determine whether the following documents exist:
+Klasifikasikan informasi sebagai:
 
 ```text
-docs/01-functional-description.md
-docs/02-infrastructure.md
-docs/03-technology-stack.md
-docs/04-data-flow.md
-docs/05-unit-test-plan.md
-docs/06-capacity-planning.md
-```
-
-For each document determine:
-
-```text
-Exists
-Missing
-Outdated
-Partially Complete
-Current
-```
-
----
-
-# 4. Generate Documentation
-
-Create missing documentation.
-
-Update outdated documentation.
-
-Do not rewrite documentation that is already accurate unless necessary.
-
-Maintain the existing documentation style when possible.
-
----
-
-# 5. Evidence Classification
-
-Every significant piece of information should be classified as:
-
-```text
-Implemented
-Configured
 Measured
-Estimated
-Unknown
-```
-
-Examples:
-
-```text
-Go version:
 Configured
-
-CPU limit:
-Configured
-
-Production RPS:
-Measured
-
-Expected growth:
+Calculated
 Estimated
-
-Business requirement:
-Unknown
+Unknown / Not Defined
 ```
 
----
-
-# 6. Cross-Document Consistency
-
-After generating documentation, compare the documents against each other.
-
-Verify:
-
-- technology stack matches infrastructure
-- infrastructure matches environment variables
-- data flow matches architecture
-- unit test plan matches actual tests
-- capacity planning matches infrastructure configuration
-- external services are consistently documented
-- database dependencies are consistently documented
-
----
-
-# 7. Documentation Drift
-
-Detect:
-
-- obsolete components
-- removed environment variables
-- unused dependencies
-- undocumented dependencies
-- missing infrastructure
-- outdated API documentation
-- outdated Mermaid diagrams
-- missing tests
-- outdated capacity assumptions
-
-Correct documentation when the actual implementation can be determined.
-
----
-
-# 8. Sensitive Information
-
-Never document:
-
-- passwords
-- API keys
-- tokens
-- private keys
-- credentials
-- secrets
-- connection strings containing credentials
-
-Replace sensitive values with:
-
-```text
-<REDACTED>
-```
-
----
-
-# 9. Final Validation
-
-Before completing the task:
-
-1. Verify all required documents exist.
-2. Verify documents represent current implementation.
-3. Verify Mermaid diagrams.
-4. Verify environment variables.
-5. Verify dependencies.
-6. Verify tests.
-7. Verify infrastructure.
-8. Verify capacity assumptions.
-9. Verify no secrets are exposed.
-
----
-
-# 10. Output
-
-After completing the documentation, report:
+## Output Summary
 
 ```text
 Documentation Analysis
 
-Functional Description: Created / Updated / Current
-Infrastructure: Created / Updated / Current
+Deskripsi Fungsional: Created / Updated / Current
+Infrastruktur: Created / Updated / Current
 Technology Stack: Created / Updated / Current
 Data Flow: Created / Updated / Current
 Unit Test Plan: Created / Updated / Current
@@ -243,6 +83,9 @@ Assumptions:
 Unknown Information:
 - ...
 
-Potential Drift:
+Documentation Drift:
+- ...
+
+Validation Required:
 - ...
 ```

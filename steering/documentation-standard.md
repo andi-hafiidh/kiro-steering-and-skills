@@ -4,29 +4,117 @@ inclusion: always
 
 # Engineering Documentation Standard
 
-## 1. Purpose
+## 1. Tujuan
 
-This steering defines the mandatory engineering documentation standard for the project.
+Steering ini mendefinisikan standar dokumentasi engineering yang wajib diterapkan pada project.
 
-Kiro MUST ensure that project documentation is:
+Kiro MUST memastikan dokumentasi project:
 
-- Accurate
-- Traceable
-- Consistent
-- Verifiable
-- Current
-- Maintainable
-- Evidence-based
+- Akurat
+- Dapat ditelusuri
+- Konsisten
+- Dapat diverifikasi
+- Selalu diperbarui
+- Mudah dipelihara
+- Berbasis evidence
 
-Documentation MUST represent the actual implementation of the project and MUST evolve together with source code, infrastructure, tests, configuration, and architecture.
+Dokumentasi MUST merepresentasikan implementasi aktual dan MUST berkembang bersama source code, konfigurasi, infrastructure, testing, dan architecture.
 
 ---
 
-# 2. Source of Truth
+## 2. Bahasa Dokumentasi
 
-The implementation is the primary source of truth.
+Seluruh dokumentasi engineering yang dihasilkan atau diperbarui oleh Kiro MUST ditulis dalam Bahasa Indonesia.
 
-Kiro MUST prioritize information sources in the following order:
+Ketentuan:
+
+1. Judul, subjudul, deskripsi, tabel, catatan, rekomendasi, dan hasil analisis MUST menggunakan Bahasa Indonesia.
+2. Istilah teknis yang umum digunakan di industri MAY tetap menggunakan Bahasa Inggris jika penerjemahan mengurangi kejelasan.
+3. Nama teknis yang berasal dari implementasi MUST dipertahankan apa adanya.
+
+Nama berikut MUST NOT diterjemahkan:
+
+- environment variable
+- function
+- method
+- struct/class
+- package/module
+- database
+- table
+- column
+- Kafka topic
+- queue
+- API endpoint
+- HTTP method
+- service
+- deployment
+- container
+- repository
+- library
+- framework
+- file path
+
+Istilah teknis berikut MAY tetap menggunakan Bahasa Inggris:
+
+- API
+- REST
+- gRPC
+- Database
+- Cache
+- Message Broker
+- Load Balancer
+- Kubernetes
+- OpenShift
+- Docker
+- CI/CD
+- Unit Test
+- Load Test
+- Stress Test
+- Spike Test
+- Soak Test
+- Request
+- Response
+- Handler
+- Service
+- Repository
+- Middleware
+- Worker
+- Scheduler
+- Consumer
+- Producer
+- Connection Pool
+- Health Check
+- Readiness Probe
+- Liveness Probe
+- Horizontal Scaling
+- Vertical Scaling
+- Autoscaling
+- Throughput
+- Latency
+- RPS
+- CPU
+- Memory
+- Storage
+
+Gunakan gaya Bahasa Indonesia yang formal, teknis, ringkas, profesional, dan mudah dipahami engineer.
+
+Hindari terjemahan literal yang membuat istilah teknis menjadi tidak natural.
+
+Contoh:
+
+- Gunakan `Connection Pool Database`, bukan `Kolam Koneksi Basis Data`.
+- Gunakan `Health Check`, bukan `Pemeriksaan Kesehatan`.
+- Gunakan `Request Timeout`, bukan `Batas Waktu Permintaan`.
+
+Kiro MUST NOT menghasilkan dokumentasi engineering dalam Bahasa Inggris kecuali user secara eksplisit meminta Bahasa Inggris untuk task tertentu.
+
+---
+
+## 3. Source of Truth
+
+Implementasi adalah sumber kebenaran utama.
+
+Kiro MUST memprioritaskan sumber informasi dengan urutan:
 
 1. Source code
 2. Application configuration
@@ -37,58 +125,58 @@ Kiro MUST prioritize information sources in the following order:
 7. Existing documentation
 8. Assumptions
 
-Existing documentation MUST NOT override the actual implementation.
+Existing documentation MUST NOT mengalahkan implementasi aktual.
 
-When documentation conflicts with implementation:
+Jika dokumentasi bertentangan dengan implementasi:
 
-1. Inspect the implementation.
-2. Determine the actual behavior.
-3. Identify the discrepancy.
-4. Update the documentation when documentation generation or maintenance is part of the task.
-5. Report the discrepancy.
+1. Periksa implementasi.
+2. Tentukan behavior aktual.
+3. Identifikasi discrepancy.
+4. Update dokumentasi jika generation/maintenance dokumentasi termasuk dalam task.
+5. Laporkan discrepancy.
 
 ---
 
-# 3. No Fabrication
+## 4. No Fabrication
 
-Kiro MUST NOT invent technical, architectural, operational, business, testing, or performance information.
+Kiro MUST NOT mengarang informasi teknis, arsitektural, operasional, bisnis, testing, maupun performance.
 
-The following MUST NOT be fabricated:
+Informasi berikut MUST NOT difabrikasi:
 
-- APIs
+- API
 - business rules
 - infrastructure
-- databases
-- caches
-- message brokers
-- external services
-- environment variables
-- technology versions
-- architecture components
-- resource limits
+- database
+- cache
+- message broker
+- external service
+- environment variable
+- technology version
+- architecture component
+- resource limit
 - traffic
 - RPS
 - latency
 - test coverage
 - storage growth
 - capacity
-- production metrics
+- production metric
 
-Use the following evidence classifications:
+Gunakan klasifikasi evidence berikut:
 
-- `Measured` — obtained from actual monitoring, production metrics, or load testing
-- `Configured` — obtained from source code, configuration, deployment manifests, or infrastructure definitions
-- `Calculated` — mathematically derived from verified information
-- `Estimated` — based on explicit engineering assumptions
-- `Unknown / Not Defined` — reliable information is unavailable
+- `Measured` — berasal dari monitoring aktual, production metrics, atau load testing
+- `Configured` — berasal dari source code, configuration, deployment manifest, atau infrastructure definition
+- `Calculated` — dihitung dari informasi yang sudah terverifikasi
+- `Estimated` — berdasarkan asumsi engineering yang eksplisit
+- `Unknown / Not Defined` — informasi yang dapat dipercaya tidak tersedia
 
-Estimated values MUST NEVER be presented as measured values.
+Nilai `Estimated` MUST NEVER disajikan sebagai `Measured`.
 
 ---
 
-# 4. Mandatory Documentation
+## 5. Dokumentasi Wajib
 
-Every project MUST maintain the following documentation:
+Setiap project MUST memiliki:
 
 ```text
 docs/
@@ -100,15 +188,15 @@ docs/
 └── 06-capacity-planning.md
 ```
 
-The naming and numbering SHOULD remain consistent across projects.
+Nama file dan numbering SHOULD tetap konsisten antar-project.
 
 ---
 
-# 5. Repository Discovery
+## 6. Repository Discovery
 
-Before generating or updating documentation, Kiro MUST inspect the repository.
+Sebelum menghasilkan atau memperbarui dokumentasi, Kiro MUST melakukan repository discovery.
 
-Inspect the following when available:
+Periksa jika tersedia:
 
 ```text
 README.md
@@ -143,57 +231,53 @@ tests/
 test/
 ```
 
-Kiro MUST adapt discovery to the actual technology and repository structure.
+Kiro MUST menyesuaikan discovery dengan technology stack dan struktur repository aktual.
 
-The discovery SHOULD identify:
+Discovery SHOULD mengidentifikasi:
 
 - programming language
 - framework
 - application structure
-- API endpoints
+- API endpoint
 - database
 - cache
 - message broker
-- external services
-- environment variables
+- external service
+- environment variable
 - infrastructure
 - deployment configuration
 - CI/CD
-- tests
+- test
 - observability
 - storage
 - authentication
 - authorization
-- scheduled jobs
-- background workers
+- scheduled job
+- background worker
 
 ---
 
-# 6. Documentation Traceability
+## 7. Traceability
 
-Documentation SHOULD be generated based on actual evidence.
+Setiap informasi teknis penting SHOULD memiliki evidence yang dapat ditelusuri.
 
-For each significant technical statement, Kiro SHOULD be able to answer:
-
-> Where does this information come from?
-
-Examples:
+Contoh:
 
 ```text
 Technology:
 go.mod
 
 Database:
-DATABASE_URL + database initialization code
+DATABASE_URL + database initialization
 
 Redis:
 REDIS_HOST + Redis client initialization
 
 Kafka:
-KAFKA_BROKERS + Kafka producer/consumer implementation
+KAFKA_BROKERS + producer/consumer implementation
 
 Kubernetes:
-deployment manifests / Helm values
+deployment manifest / Helm values
 
 Unit Test:
 *_test.go
@@ -202,13 +286,13 @@ CPU:
 Kubernetes/OpenShift resource configuration
 ```
 
-If evidence cannot be found, use:
+Jika evidence tidak ditemukan:
 
 `Unknown / Not Defined`
 
 ---
 
-# 7. Functional Description
+## 8. Deskripsi Fungsional
 
 File:
 
@@ -216,47 +300,45 @@ File:
 docs/01-functional-description.md
 ```
 
-The document MUST describe the actual functional behavior of the application.
-
-Minimum structure:
+Minimum struktur:
 
 ```markdown
-# Functional Description
+# Deskripsi Fungsional
 
-## 1. Overview
-## 2. Business Purpose
-## 3. Scope
-## 4. Actors
-## 5. Functional Capabilities
-## 6. Main Business Flow
-## 7. Alternative Flow
-## 8. Error Handling
-## 9. Business Rules
-## 10. External Integration
-## 11. Non-Functional Requirements
-## 12. Limitations
+## 1. Gambaran Umum
+## 2. Tujuan Bisnis
+## 3. Ruang Lingkup
+## 4. Aktor
+## 5. Kapabilitas Fungsional
+## 6. Alur Bisnis Utama
+## 7. Alur Alternatif
+## 8. Penanganan Error
+## 9. Aturan Bisnis
+## 10. Integrasi Eksternal
+## 11. Kebutuhan Non-Fungsional
+## 12. Keterbatasan
 ```
 
-For each major functionality describe:
+Untuk setiap fungsi utama dokumentasikan:
 
-- purpose
+- tujuan
 - input
-- process
+- proses
 - output
-- validation
+- validasi
 - business rules
-- error conditions
-- external dependencies
+- error condition
+- external dependency
 
-Business rules MUST NOT be invented.
+Business rules MUST NOT dibuat berdasarkan asumsi.
 
-If business requirements cannot be determined from the repository, state:
+Jika tidak dapat diverifikasi:
 
 `Unknown / Not Defined`
 
 ---
 
-# 8. Infrastructure Documentation
+## 9. Infrastruktur
 
 File:
 
@@ -264,28 +346,12 @@ File:
 docs/02-infrastructure.md
 ```
 
-The infrastructure documentation MUST describe infrastructure actually used by the application.
-
-Inspect when available:
-
-- `.env`
-- `.env.example`
-- application configuration
-- Dockerfile
-- Docker Compose
-- Kubernetes manifests
-- OpenShift manifests
-- Helm
-- Terraform
-- CI/CD configuration
-- connection configuration
-
-Minimum structure:
+Minimum struktur:
 
 ```markdown
-# Infrastructure
+# Infrastruktur
 
-## 1. Infrastructure Overview
+## 1. Gambaran Umum Infrastruktur
 ## 2. Runtime Environment
 ## 3. Application Runtime
 ## 4. Environment Variables
@@ -299,38 +365,38 @@ Minimum structure:
 ## 12. Health Check
 ## 13. Resource Configuration
 ## 14. Infrastructure Dependency Diagram
-## 15. Environment Differences
+## 15. Perbedaan Antar Environment
 ```
 
-The documentation SHOULD identify:
+Dokumentasi SHOULD mengidentifikasi:
 
 - deployment platform
 - application runtime
 - replicas
-- CPU request and limit
-- memory request and limit
-- exposed ports
-- health checks
+- CPU request/limit
+- memory request/limit
+- exposed port
+- health check
 - database
 - cache
 - message broker
 - storage
-- external APIs
-- network dependencies
+- external API
+- network dependency
 - scaling configuration
 
 ---
 
-# 9. Environment Variable Standard
+## 10. Environment Variable Standard
 
-Kiro MUST inspect all environment variables referenced by the application.
+Semua environment variable yang digunakan aplikasi MUST dianalisis.
 
-The documentation SHOULD contain:
+Gunakan tabel:
 
 | Variable | Required | Type | Purpose | Default | Environment | Dependency |
 |---|---|---|---|---|---|---|
 
-Classify variables into:
+Klasifikasi:
 
 - Application
 - Database
@@ -343,35 +409,27 @@ Classify variables into:
 - Feature Flag
 - Infrastructure
 
-Kiro SHOULD detect:
+Kiro SHOULD mendeteksi:
 
-- variables used but undocumented
-- variables documented but unused
-- required variables missing from `.env.example`
-- duplicated variables
-- environment-specific variables
+- variable digunakan tetapi tidak terdokumentasi
+- variable terdokumentasi tetapi tidak digunakan
+- required variable tidak tersedia pada `.env.example`
+- duplicated variable
+- environment-specific variable
 
-Sensitive values MUST NEVER be exposed.
+Sensitive values MUST NEVER ditampilkan.
 
-Never document actual:
-
-- passwords
-- API keys
-- tokens
-- private keys
-- credentials
-- secrets
-- connection strings containing credentials
-
-Use:
+Gunakan:
 
 ```text
 <REDACTED>
 ```
 
+untuk password, API key, token, private key, credential, secret, dan connection string yang mengandung credential.
+
 ---
 
-# 10. Technology Stack
+## 11. Technology Stack
 
 File:
 
@@ -379,9 +437,7 @@ File:
 docs/03-technology-stack.md
 ```
 
-The technology stack MUST be derived from actual dependencies and implementation.
-
-Minimum structure:
+Minimum struktur:
 
 ```markdown
 # Technology Stack
@@ -404,16 +460,16 @@ Minimum structure:
 ## 16. Dependency Summary
 ```
 
-For technologies, document when verifiable:
+Gunakan tabel bila sesuai:
 
 | Technology | Version | Purpose | Evidence |
 |---|---|---|---|
 
-Technology versions MUST NOT be guessed.
+Technology version MUST NOT ditebak.
 
 ---
 
-# 11. Data Flow Diagram
+## 12. Data Flow
 
 File:
 
@@ -421,11 +477,7 @@ File:
 docs/04-data-flow.md
 ```
 
-The data flow MUST represent the actual implementation.
-
-Mermaid MUST be used for diagrams.
-
-Minimum structure:
+Minimum struktur:
 
 ```markdown
 # Data Flow
@@ -439,7 +491,9 @@ Minimum structure:
 ## 7. Mermaid Diagrams
 ```
 
-Possible components include:
+Data Flow MUST menggunakan Mermaid dan MUST berdasarkan implementasi aktual.
+
+Komponen MAY mencakup:
 
 ```text
 Client
@@ -460,40 +514,20 @@ Worker
 Scheduler
 ```
 
-Only include components that can be verified from the implementation.
+Hanya masukkan komponen yang dapat diverifikasi.
 
----
-
-# 12. Data Flow Analysis Procedure
-
-When analyzing data flow, Kiro MUST:
-
-1. Identify application entry points.
-2. Identify HTTP or gRPC endpoints.
-3. Identify event consumers.
-4. Identify scheduled jobs.
-5. Identify background workers.
-6. Trace request processing.
-7. Identify services and use cases.
-8. Identify repositories.
-9. Identify databases.
-10. Identify caches.
-11. Identify message brokers.
-12. Identify external services.
-13. Determine synchronous or asynchronous communication.
-14. Generate Mermaid diagrams.
-15. Validate every diagram component against implementation.
-
-Example:
+Contoh:
 
 ```mermaid
 flowchart LR
-    Client --> API
-    API --> Service
-    Service --> Database
+    Client[Aplikasi Pengguna] --> API[Customer API]
+    API --> Auth[Authentication]
+    API --> Service[Customer Service]
+    Service --> Cache[(Redis)]
+    Service --> DB[(Database)]
 ```
 
-Asynchronous example:
+Untuk asynchronous flow:
 
 ```mermaid
 flowchart LR
@@ -503,37 +537,31 @@ flowchart LR
     Service --> Database
 ```
 
-For every important diagram component, Kiro SHOULD identify evidence.
+---
 
-Example:
+## 13. Data Flow Analysis Procedure
 
-```text
-Redis
+Kiro MUST:
 
-Evidence:
-- REDIS_HOST
-- Redis client initialization
-- Redis dependency
-```
+1. Identifikasi application entry point.
+2. Identifikasi HTTP/gRPC endpoint.
+3. Identifikasi event consumer.
+4. Identifikasi scheduled job.
+5. Identifikasi background worker.
+6. Trace request processing.
+7. Identifikasi service/use case.
+8. Identifikasi repository.
+9. Identifikasi database.
+10. Identifikasi cache.
+11. Identifikasi message broker.
+12. Identifikasi external service.
+13. Tentukan synchronous/asynchronous communication.
+14. Generate Mermaid.
+15. Validasi setiap diagram component terhadap implementasi.
 
 ---
 
-# 13. Mermaid Standard
-
-Mermaid diagrams MUST:
-
-- represent actual architecture
-- use consistent naming
-- avoid imaginary components
-- show meaningful data flow
-- distinguish synchronous and asynchronous communication when relevant
-- avoid unnecessary implementation detail at high-level diagrams
-
-Kiro MUST NOT create architecture diagrams solely from assumptions.
-
----
-
-# 14. Unit Test Plan
+## 14. Unit Test Plan
 
 File:
 
@@ -541,17 +569,15 @@ File:
 docs/05-unit-test-plan.md
 ```
 
-The unit test plan MUST represent actual testing strategy and implementation.
-
-Minimum structure:
+Minimum struktur:
 
 ```markdown
 # Unit Test Plan
 
-## 1. Testing Objective
-## 2. Testing Scope
-## 3. Testing Strategy
-## 4. Units Under Test
+## 1. Tujuan Testing
+## 2. Ruang Lingkup Testing
+## 3. Strategi Testing
+## 4. Unit yang Diuji
 ## 5. Test Scenarios
 ## 6. Positive Cases
 ## 7. Negative Cases
@@ -564,45 +590,9 @@ Minimum structure:
 ## 14. Testing Gaps
 ```
 
----
+Kiro MUST memeriksa test implementation aktual.
 
-# 15. Unit Test Analysis Procedure
-
-Kiro MUST inspect actual test implementation.
-
-Identify:
-
-- test framework
-- test files
-- test suites
-- test cases
-- mocks
-- fixtures
-- coverage configuration
-- critical paths
-- untested paths
-
-Example patterns:
-
-```text
-Go:
-*_test.go
-
-JavaScript / TypeScript:
-*.test.ts
-*.test.tsx
-*.spec.ts
-*.spec.tsx
-
-Python:
-test_*.py
-*_test.py
-
-Java:
-*Test.java
-```
-
-Kiro MUST distinguish:
+Klasifikasikan test sebagai:
 
 ```text
 Implemented Test
@@ -610,22 +600,38 @@ Planned Test
 Missing Test
 ```
 
-Never claim a test exists unless it can be verified.
+Kiro MUST NOT menyatakan test atau coverage ada tanpa evidence.
 
-Tests SHOULD cover when applicable:
+---
 
-- Positive cases
-- Negative cases
-- Boundary cases
+## 15. Unit Test Analysis Procedure
+
+Identifikasi:
+
+- testing framework
+- test file
+- test suite
+- test case
+- mock
+- fixture
+- coverage configuration
+- critical path
+- untested path
+
+Test SHOULD mencakup jika applicable:
+
+- Positive
+- Negative
+- Boundary
 - Validation
-- Error handling
-- Dependency failure
+- Error Handling
+- Dependency Failure
 - Timeout
 - Concurrency
 - Authentication
 - Authorization
 
-Prioritize:
+Prioritas:
 
 ```text
 Critical Business Logic
@@ -641,30 +647,15 @@ Boundary Conditions
 Low-Risk Utilities
 ```
 
----
-
-# 16. Test Coverage
-
-If coverage reports or configuration exist, inspect them.
-
-Document when available:
-
-- overall coverage
-- package/module coverage
-- critical path coverage
-- uncovered areas
-
-If coverage cannot be verified:
+Jika coverage tidak dapat diverifikasi:
 
 ```text
 Coverage: Unknown / Not Defined
 ```
 
-Kiro MUST NOT fabricate coverage values.
-
 ---
 
-# 17. Capacity Planning
+## 16. Capacity Planning
 
 File:
 
@@ -672,28 +663,26 @@ File:
 docs/06-capacity-planning.md
 ```
 
-Capacity planning MUST be evidence-based.
-
-Minimum structure:
+Minimum struktur:
 
 ```markdown
 # Capacity Planning
 
-## 1. Objective
-## 2. Current Architecture
-## 3. Traffic Assumptions
-## 4. Transaction Volume
+## 1. Tujuan
+## 2. Arsitektur Saat Ini
+## 3. Asumsi Traffic
+## 4. Volume Transaksi
 ## 5. Concurrent Users
 ## 6. Request Rate
 ## 7. Response Time
-## 8. CPU Requirement
-## 9. Memory Requirement
-## 10. Storage Requirement
-## 11. Database Capacity
+## 8. Kebutuhan CPU
+## 9. Kebutuhan Memory
+## 10. Kebutuhan Storage
+## 11. Kapasitas Database
 ## 12. Database Connections
-## 13. Cache Capacity
-## 14. Message Broker Capacity
-## 15. Network Requirement
+## 13. Kapasitas Cache
+## 14. Kapasitas Message Broker
+## 15. Kebutuhan Network
 ## 16. Scaling Strategy
 ## 17. Bottleneck Analysis
 ## 18. Capacity Threshold
@@ -702,11 +691,13 @@ Minimum structure:
 ## 21. Capacity Validation Plan
 ```
 
+Capacity planning MUST evidence-based.
+
 ---
 
-# 18. Capacity Discovery
+## 17. Capacity Discovery
 
-Inspect when available:
+Periksa jika tersedia:
 
 - Dockerfile
 - Docker Compose
@@ -729,7 +720,7 @@ Inspect when available:
 - metrics
 - logs
 
-Identify:
+Identifikasi:
 
 - CPU
 - memory
@@ -744,9 +735,9 @@ Identify:
 
 ---
 
-# 19. Capacity Evidence Classification
+## 18. Capacity Evidence Classification
 
-Every capacity value MUST use one of:
+Setiap value MUST diklasifikasikan sebagai:
 
 ```text
 Measured
@@ -756,7 +747,7 @@ Estimated
 Unknown / Not Defined
 ```
 
-Examples:
+Contoh:
 
 ```text
 CPU Limit
@@ -779,66 +770,64 @@ Status: Calculated
 Source: 3 replicas × 50 connections
 ```
 
-Estimated values MUST NEVER be presented as production measurements.
-
 ---
 
-# 20. Capacity Calculation
+## 19. Capacity Calculation
 
-When sufficient verified data exists, Kiro SHOULD calculate:
+Jika data mencukupi, Kiro SHOULD menghitung:
 
-## Requests Per Second
+### Requests Per Second
 
 ```text
 RPS = Total Requests / Total Seconds
 ```
 
-## Daily Requests
+### Daily Requests
 
 ```text
 Daily Requests = Average RPS × 86,400
 ```
 
-## Database Connections
+### Database Connections
 
 ```text
 Total DB Connections =
 Application Replicas × DB Connections Per Replica
 ```
 
-## Storage Growth
+### Storage Growth
 
 ```text
 Daily Storage Growth =
 Records Per Day × Average Record Size
 ```
 
-## Annual Storage Growth
+### Annual Storage Growth
 
 ```text
 Annual Storage Growth =
 Daily Storage Growth × 365
 ```
 
-## Required Capacity
+### Required Capacity
 
 ```text
 Required Capacity =
 Expected Load × Safety Factor
 ```
 
-The safety factor MUST be explicitly stated and documented as an assumption when it is not based on an organizational standard.
+Safety factor MUST dijelaskan sebagai assumption jika bukan berasal dari organizational standard.
 
 ---
 
-# 21. Capacity Planning Output
+## 20. Capacity Output
 
-Capacity documentation SHOULD include:
+Gunakan tabel jika sesuai:
 
 | Metric | Current | Target | Threshold | Classification | Source |
 |---|---:|---:|---:|---|---|
 
-Examples of metrics:
+Metric MAY mencakup:
 
 - RPS
 - p50 latency
@@ -854,15 +843,15 @@ Examples of metrics:
 - Storage Growth
 - Network Throughput
 
-Do not invent values.
+Jangan mengarang nilai.
 
-Use `Unknown / Not Defined` where needed.
+Gunakan `Unknown / Not Defined` jika tidak tersedia.
 
 ---
 
-# 22. Capacity Bottleneck Analysis
+## 21. Bottleneck Analysis
 
-Analyze the end-to-end path where applicable:
+Analisis end-to-end path jika applicable:
 
 ```text
 Client
@@ -880,7 +869,7 @@ Database
 External Services
 ```
 
-For each potential bottleneck document:
+Untuk setiap bottleneck dokumentasikan:
 
 - component
 - evidence
@@ -889,33 +878,18 @@ For each potential bottleneck document:
 - potential failure mode
 - recommendation
 
-Potential bottlenecks MAY include:
-
-- CPU saturation
-- memory pressure
-- excessive GC
-- thread/goroutine exhaustion
-- database connection exhaustion
-- database CPU
-- slow queries
-- Redis client saturation
-- Kafka consumer lag
-- storage saturation
-- network latency
-- slow external API
-
 ---
 
-# 23. Scaling Analysis
+## 22. Scaling Analysis
 
-Determine whether the application supports:
+Tentukan dukungan terhadap:
 
 - Horizontal Scaling
 - Vertical Scaling
 - Autoscaling
 - Manual Scaling
 
-Inspect:
+Periksa:
 
 - replica count
 - HPA
@@ -923,25 +897,25 @@ Inspect:
 - statelessness
 - session storage
 - shared filesystem dependency
-- database bottlenecks
+- database bottleneck
 - cache dependency
-- queue or broker configuration
+- queue/broker configuration
 
-Document scaling limitations when identified.
+Dokumentasikan scaling limitation jika ditemukan.
 
 ---
 
-# 24. Capacity Validation Plan
+## 23. Capacity Validation Plan
 
-If actual production metrics are unavailable, Kiro MUST provide a validation plan instead of fabricating values.
+Jika production metrics tidak tersedia, Kiro MUST membuat validation plan, bukan mengarang angka.
 
 Recommended tests:
 
-1. Baseline test
-2. Load test
-3. Stress test
-4. Spike test
-5. Soak test
+1. Baseline Test
+2. Load Test
+3. Stress Test
+4. Spike Test
+5. Soak Test
 
 Recommended measurements:
 
@@ -961,7 +935,7 @@ Kafka Consumer Lag
 Storage
 ```
 
-The objective is to move capacity data from:
+Tujuan:
 
 ```text
 Estimated
@@ -973,11 +947,9 @@ Measured
 
 ---
 
-# 25. Documentation Impact Analysis
+## 24. Documentation Impact Analysis
 
-Whenever implementation changes, Kiro MUST evaluate whether documentation must also change.
-
-Use this mapping:
+Setiap implementation change MUST dievaluasi terhadap dokumentasi.
 
 | Change | Required Documentation Review |
 |---|---|
@@ -986,7 +958,7 @@ Use this mapping:
 | API Change | Functional Description + Data Flow |
 | New ENV Variable | Infrastructure |
 | Removed ENV Variable | Infrastructure |
-| Database Change | Infrastructure + Data Flow + Capacity Planning when relevant |
+| Database Change | Infrastructure + Data Flow + Capacity Planning jika relevan |
 | New Dependency | Technology Stack |
 | Framework Change | Technology Stack |
 | Architecture Change | Data Flow |
@@ -1002,46 +974,44 @@ Use this mapping:
 | Storage Change | Infrastructure + Data Flow + Capacity Planning |
 | Observability Change | Infrastructure + Technology Stack |
 
-Kiro MUST evaluate documentation impact before considering an implementation task complete.
+Kiro MUST melakukan impact analysis sebelum task implementasi dianggap selesai.
 
 ---
 
-# 26. Documentation Drift Detection
+## 25. Documentation Drift Detection
 
-Kiro SHOULD detect documentation drift.
-
-Examples:
+Kiro SHOULD mendeteksi:
 
 ```text
-Documented ENV does not exist.
-Used ENV is undocumented.
-Documented dependency does not exist.
-Implemented dependency is undocumented.
-Documented API does not exist.
-Implemented API is undocumented.
-Documented infrastructure does not exist.
-Implemented infrastructure is undocumented.
-Mermaid diagram does not match implementation.
-Documented test does not exist.
-Implemented test is undocumented.
-Replica count is outdated.
-CPU or memory configuration is outdated.
-Connection pool information is outdated.
-Capacity assumptions are outdated.
+Documented ENV tidak ada.
+Used ENV belum terdokumentasi.
+Documented dependency tidak ada.
+Implemented dependency belum terdokumentasi.
+Documented API tidak ada.
+Implemented API belum terdokumentasi.
+Documented infrastructure tidak ada.
+Implemented infrastructure belum terdokumentasi.
+Mermaid tidak sesuai implementasi.
+Documented test tidak ada.
+Implemented test belum terdokumentasi.
+Replica count outdated.
+CPU/memory configuration outdated.
+Connection pool outdated.
+Capacity assumption outdated.
 ```
 
-When drift is detected:
+Jika drift terdeteksi:
 
-1. Report the discrepancy.
-2. Determine the correct implementation.
-3. Update documentation when documentation maintenance is part of the task.
-4. Re-run consistency validation.
+1. Laporkan discrepancy.
+2. Tentukan implementasi yang benar.
+3. Update dokumentasi jika termasuk scope task.
+4. Lakukan consistency validation ulang.
 
 ---
 
-# 27. Cross-Document Consistency
+## 26. Cross-Document Consistency
 
-The following documents MUST remain consistent:
+Dokumen berikut MUST konsisten:
 
 ```text
 Functional Description
@@ -1057,23 +1027,21 @@ Unit Test Plan
 Capacity Planning
 ```
 
-Examples:
+Contoh:
 
-- Database in Infrastructure MUST match Data Flow.
-- Redis in Technology Stack MUST match Infrastructure.
-- Kafka in Technology Stack MUST match Data Flow.
-- Kubernetes/OpenShift replicas in Infrastructure MUST match Capacity Planning.
-- CPU and memory configuration MUST match between Infrastructure and Capacity Planning.
-- Tests documented in Unit Test Plan MUST exist or be explicitly marked Planned/Missing.
-- External services in Functional Description SHOULD appear in Data Flow when technically relevant.
+- Database pada Infrastructure MUST sama dengan Data Flow.
+- Redis pada Technology Stack MUST sesuai dengan Infrastructure.
+- Kafka pada Technology Stack MUST sesuai dengan Data Flow.
+- Replica count pada Infrastructure MUST sama dengan Capacity Planning.
+- CPU/memory MUST konsisten antara Infrastructure dan Capacity Planning.
+- Test pada Unit Test Plan MUST ada atau ditandai Planned/Missing.
+- External service pada Functional Description SHOULD tampil pada Data Flow jika teknisnya relevan.
 
 ---
 
-# 28. Documentation Status
+## 27. Documentation Status
 
-Each generated document SHOULD indicate its verification status near the top.
-
-Allowed values:
+Setiap dokumen SHOULD memiliki status:
 
 ```text
 Current
@@ -1083,22 +1051,22 @@ Outdated
 Unknown
 ```
 
-Example:
+Contoh:
 
 ```markdown
 > Documentation Status: Partially Verified
 >
-> Production traffic metrics are unavailable.
-> Capacity values are based on configured resources and engineering estimates.
+> Production traffic metrics belum tersedia.
+> Capacity menggunakan configured resources dan engineering estimates.
 ```
 
 ---
 
-# 29. Documentation Audit
+## 28. Documentation Audit
 
-Before important releases, pull requests, or major implementation changes, Kiro SHOULD perform a documentation audit.
+Sebelum release penting, pull request, atau major change, Kiro SHOULD melakukan documentation audit.
 
-The audit MUST compare:
+Audit MUST membandingkan:
 
 ```text
 Source Code
@@ -1114,7 +1082,7 @@ Tests
 Documentation
 ```
 
-The audit SHOULD identify:
+Audit SHOULD mengidentifikasi:
 
 - documentation drift
 - missing documentation
@@ -1122,158 +1090,100 @@ The audit SHOULD identify:
 - cross-document inconsistencies
 - outdated capacity assumptions
 - undocumented environment variables
-- obsolete technologies
-- outdated diagrams
+- obsolete technology
+- outdated diagram
 
 ---
 
-# 30. Audit Severity
+## 29. Audit Severity
 
-Classify findings as:
+### Critical
 
-## Critical
+Dapat menyebabkan keputusan engineering, security, deployment, atau operational yang salah.
 
-Can cause an incorrect engineering, security, deployment, or operational decision.
+### High
 
-Examples:
+Mismatch dokumentasi yang signifikan.
 
-- wrong database
-- wrong production architecture
-- incorrect security mechanism
-- incorrect deployment dependency
-- unsafe capacity information
+### Medium
 
-## High
+Informasi belum lengkap namun tidak langsung mengganggu operation.
 
-Significant documentation mismatch.
+### Low
 
-Examples:
-
-- missing external service
-- incorrect API flow
-- incorrect infrastructure
-- incorrect scaling configuration
-
-## Medium
-
-Incomplete information that does not immediately affect operation.
-
-Examples:
-
-- missing test scenario
-- missing dependency description
-- incomplete error flow
-
-## Low
-
-Minor documentation quality problem.
-
-Examples:
-
-- naming inconsistency
-- outdated example
-- formatting issue
+Masalah minor pada consistency, naming, example, atau formatting.
 
 ---
 
-# 31. Documentation Health Score
-
-When performing an audit, Kiro MAY calculate:
-
-```text
-Documentation Score =
-Verified Items / Total Audited Items × 100
-```
-
-Classification:
-
-```text
-90–100  Excellent
-80–89   Good
-70–79   Needs Improvement
-<70     Poor
-```
-
-The score MUST be based on actual audit findings.
-
-Kiro MUST NOT fabricate audit scores.
-
----
-
-# 32. Audit Result
+## 30. Audit Result
 
 Return:
 
-```text
-PASS
-```
+`PASS`
 
-when:
+jika:
 
-- no critical issues exist
-- no high-priority drift exists
-- mandatory documentation exists
-- architecture is consistent
-- infrastructure is consistent
-- capacity data is correctly classified
+- tidak ada Critical issue
+- tidak ada High-priority drift
+- mandatory documentation tersedia
+- architecture konsisten
+- infrastructure konsisten
+- capacity data terklasifikasi dengan benar
 
 Return:
 
-```text
-PASS WITH WARNINGS
-```
+`PASS WITH WARNINGS`
 
-when:
+jika:
 
-- no critical issues exist
-- only medium or low issues exist
-- documentation remains usable
+- tidak ada Critical issue
+- hanya Medium/Low issue
+- dokumentasi masih usable
 
 Return:
 
-```text
-FAIL
-```
+`FAIL`
 
-when:
+jika:
 
-- critical issues exist
-- major infrastructure mismatch exists
-- architecture is incorrectly documented
-- unsafe or unsupported capacity information exists
-- mandatory documentation is significantly missing
+- terdapat Critical issue
+- major infrastructure mismatch
+- architecture salah didokumentasikan
+- capacity information tidak aman/tidak didukung evidence
+- mandatory documentation secara signifikan tidak tersedia
 
 ---
 
-# 33. Documentation Quality Gate
+## 31. Documentation Quality Gate
 
-Before completing documentation work, Kiro MUST verify:
+Sebelum documentation task selesai, Kiro MUST verify:
 
-- [ ] Functional behavior matches implementation
-- [ ] Infrastructure matches configuration
-- [ ] Environment variables are verified
-- [ ] Technology stack matches dependencies
-- [ ] Mermaid diagrams match architecture
-- [ ] Unit test plan matches actual tests
-- [ ] Capacity values have evidence classifications
-- [ ] No secrets are exposed
-- [ ] No obsolete components remain
-- [ ] Unknown information is explicitly marked
-- [ ] Assumptions are explicitly identified
-- [ ] Documentation references current implementation
-- [ ] Cross-document consistency is maintained
+- [ ] Functional behavior sesuai implementasi
+- [ ] Infrastructure sesuai configuration
+- [ ] Environment variables terverifikasi
+- [ ] Technology stack sesuai dependencies
+- [ ] Mermaid sesuai architecture
+- [ ] Unit Test Plan sesuai actual tests
+- [ ] Capacity values memiliki evidence classification
+- [ ] Tidak ada secret yang terekspos
+- [ ] Tidak ada obsolete component
+- [ ] Unknown information ditandai eksplisit
+- [ ] Assumptions ditandai eksplisit
+- [ ] Documentation traceable ke implementation
+- [ ] Cross-document consistency terjaga
+- [ ] Seluruh narasi dokumentasi menggunakan Bahasa Indonesia
 
 ---
 
-# 34. Final Documentation Review
+## 32. Final Documentation Review
 
-Before completing a feature or major change, Kiro SHOULD produce:
+Sebelum menyelesaikan feature atau major change, Kiro SHOULD menghasilkan:
 
 ```text
 Documentation Review
 
-Functional Description: Updated / No Change
-Infrastructure: Updated / No Change
+Deskripsi Fungsional: Updated / No Change
+Infrastruktur: Updated / No Change
 Technology Stack: Updated / No Change
 Data Flow: Updated / No Change
 Unit Test Plan: Updated / No Change
@@ -1297,9 +1207,9 @@ Validation Required:
 
 ---
 
-# 35. Recommended Workflow
+## 33. Recommended Workflow
 
-For a new project:
+Untuk project baru:
 
 ```text
 Repository Discovery
@@ -1325,7 +1235,7 @@ Documentation Audit
 Quality Gate
 ```
 
-For an existing project change:
+Untuk perubahan existing project:
 
 ```text
 Code Change
@@ -1343,64 +1253,52 @@ Quality Gate
 
 ---
 
-# 36. Read-Only Audit Principle
+## 34. Skill Usage
 
-Documentation audit is read-only by default.
+Jika tersedia, gunakan skill berikut sesuai kebutuhan:
 
-During an audit Kiro MUST NOT modify:
+| Task | Skill |
+|---|---|
+| Generate/update seluruh dokumentasi | `documentation` |
+| Analisis architecture dan Mermaid | `data-flow-analysis` |
+| Analisis Unit Test | `unit-test-analysis` |
+| Analisis capacity | `capacity-planning` |
+| Audit dokumentasi | `documentation-audit` |
+
+Steering menentukan policy dan outcome yang wajib dicapai.
+
+Skills menentukan procedure untuk menyelesaikan analisis khusus.
+
+---
+
+## 35. Read-Only Audit Principle
+
+Documentation audit bersifat read-only secara default.
+
+Saat audit Kiro MUST NOT mengubah:
 
 - source code
 - infrastructure
 - application configuration
 - tests
-- deployment manifests
+- deployment manifest
 
-Documentation MAY be modified when:
+Dokumentasi MAY diubah jika:
 
-- explicitly requested by the user
-- documentation generation is part of the task
-- documentation synchronization is explicitly part of the requested work
-
----
-
-# 37. Documentation Ownership
-
-Documentation is part of the software development lifecycle.
-
-```text
-Requirement
-    ↓
-Design
-    ↓
-Implementation
-    ↓
-Testing
-    ↓
-Documentation
-    ↓
-Review
-    ↓
-Deployment
-    ↓
-Monitoring
-    ↓
-Capacity Analysis
-    ↓
-Continuous Documentation Update
-```
-
-Documentation MUST NOT be treated as a one-time deliverable.
+- user secara eksplisit meminta perbaikan
+- documentation generation adalah bagian dari task
+- documentation synchronization termasuk scope task
 
 ---
 
-# 38. Final Engineering Principle
+## 36. Final Engineering Principle
 
-The objective is not to create the largest possible documentation.
+Tujuan standard ini bukan menghasilkan dokumentasi sebanyak mungkin.
 
-The objective is to create documentation that is:
+Tujuannya adalah dokumentasi yang:
 
 ```text
-Accurate
+Akurat
 +
 Traceable
 +
@@ -1411,10 +1309,10 @@ Consistent
 Evidence-Based
 ```
 
-When information is unknown, explicitly state:
+Jika informasi tidak diketahui:
 
 `Unknown / Not Defined`
 
-Never replace missing evidence with assumptions presented as facts.
+Jangan mengganti evidence yang tidak tersedia dengan asumsi yang disajikan sebagai fakta.
 
-The implementation is always the primary source of truth.
+Implementasi selalu menjadi source of truth utama.
